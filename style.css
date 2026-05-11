@@ -60,3 +60,54 @@ body {
   width: 250px;
   border-radius: 10px;
 }
+:root {
+  --bg: #ffffff;
+  --text: #111827;
+}
+
+.dark {
+  --bg: #0f172a;
+  --text: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* LEFT */
+.logo {
+  flex: 1;
+}
+
+/* CENTER NAV */
+.nav-links {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* RIGHT BUTTON */
+.theme-btn {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text);
+}
