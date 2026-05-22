@@ -1,132 +1,265 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
-}
-
-/* NAVBAR */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: #111827;
-  position: sticky;
-  top: 0;
-}
-
-.navbar a {
-  color: white;
-  margin-left: 15px;
-  text-decoration: none;
-}
-
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero h1 {
-  font-size: 40px;
-}
-
-.hero button {
-  padding: 10px 20px;
-  margin-top: 20px;
-  background: #3b82f6;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-/* SECTIONS */
-.section {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-/* PROJECTS */
-.project-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.card {
-  background: #1f2937;
-  padding: 20px;
-  width: 250px;
-  border-radius: 10px;
-}
+/* ===============================
+   ROOT THEME VARIABLES
+================================= */
 :root {
-  --bg: #ffffff;
-  --text: #111827;
+  --bg: #0d1117;
+  --text: #e6edf3;
+  --card: #161b22;
+  --nav: #0d1117;
+  --accent: #2ea043;
+  --border: #30363d;
+  --btn-text: #ffffff;
 }
 
-.dark {
-  --bg: #0f172a;
-  --text: #ffffff;
+.light {
+  --bg: linear-gradient(135deg, #f8fafc, #eef2ff);
+  --text: #0f172a;
+  --card: rgba(255, 255, 255, 0.7);
+  --nav: rgba(255, 255, 255, 0.8);
+  --accent: #4f46e5; /* indigo premium */
+  --border: rgba(0, 0, 0, 0.08);
+  --btn-text: #ffffff;
+}
+/* ===============================
+   GLOBAL
+================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  font-family: Arial;
+  font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
+/* ===============================
+   NAVBAR
+================================= */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  background: var(--bg);
-  color: var(--text);
+  padding: 20px 10%;
+  position: sticky;
+  top: 0;
+  background: var(--nav);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
-/* LEFT */
 .logo {
-  flex: 1;
+  font-size: 22px;
+  font-weight: 700;
 }
 
-/* CENTER NAV */
-.nav-links {
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-/* RIGHT BUTTON */
-.theme-btn {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
+.nav-links a {
+  margin: 0 15px;
+  text-decoration: none;
   color: var(--text);
+  position: relative;
+  transition: 0.3s;
 }
-.project-links {
-  margin-top: 10px;
+
+/* underline animation */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background: var(--accent);
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* THEME BUTTON */
+.theme-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ===============================
+   HERO
+================================= */
+.hero {
+  height: 90vh;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  animation: fadeUp 1s ease;
+}
+
+.hero p {
+  font-size: 18px;
+  opacity: 0.8;
+  animation: fadeUp 1.3s ease;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  background: var(--accent);
+  color: var(--btn-text);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  animation: fadeUp 1.6s ease;
+}
+
+.hero button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ===============================
+   SECTIONS
+================================= */
+.section {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* ===============================
+   PROJECTS
+================================= */
+.project-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow hover effect */
+.card::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(46,160,67,0.2), transparent);
+  top: -50%;
+  left: -50%;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.project-links {
+  margin-top: 15px;
 }
 
 .project-links a {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: white;
+  border-radius: 6px;
   text-decoration: none;
-  padding: 6px 10px;
-  background: #222;
-  color: #fff;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .project-links a:hover {
-  background: #444;
+  transform: scale(1.05);
+}
+
+/* ===============================
+   CONTACT
+================================= */
+.contact-container {
+  margin-top: 20px;
+}
+
+.contact-links a {
+  margin: 10px;
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.3s;
+}
+
+.contact-links a:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* ===============================
+   FOOTER
+================================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+/* ===============================
+   ANIMATIONS
+================================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
