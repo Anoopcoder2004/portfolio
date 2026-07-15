@@ -263,3 +263,68 @@ footer {
     transform: translateY(0);
   }
 }
+/* ===============================
+   EXPERIENCE
+================================= */
+
+.experience-card {
+  max-width: 1000px;
+  margin: 40px auto 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.experience-header h3 {
+  font-size: 22px;
+}
+
+.experience-header span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.experience-description {
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.experience-list {
+  padding-left: 20px;
+  line-height: 1.8;
+}
+
+.experience-list li {
+  margin-bottom: 10px;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.tech-stack span {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+}
