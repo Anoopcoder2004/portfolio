@@ -1,19 +1,23 @@
-/* =====================================================
-   THEME
-===================================================== */
+// ===============================
+// THEME TOGGLE
+// ===============================
 
-const themeButton = document.querySelector(".theme-btn");
+const themeButton = document.querySelector(".theme-toggle");
 
+// 🔴 NEW: Load saved theme when the page opens
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "light") {
   document.body.classList.add("light");
   themeButton.textContent = "☀";
 } else {
+  // 🔴 NEW: Dark is the default theme
+  document.body.classList.remove("light");
   themeButton.textContent = "☾";
 }
 
 
+// Existing theme toggle function
 function toggleTheme() {
 
   document.body.classList.toggle("light");
@@ -31,140 +35,102 @@ function toggleTheme() {
 }
 
 
-/* =====================================================
-   MOBILE MENU
-===================================================== */
+// ===============================
+// NAVIGATION
+// ===============================
 
 const navLinks = document.querySelector(".nav-links");
-const navActions = document.querySelector(".nav-actions");
 
 const menuButton = document.createElement("button");
-
-menuButton.className = "menu-btn";
-menuButton.type = "button";
-menuButton.setAttribute(
-  "aria-label",
-  "Toggle navigation menu"
-);
-
+menuButton.classList.add("menu-btn");
 menuButton.textContent = "☰";
 
-navActions.insertBefore(
-  menuButton,
-  themeButton
-);
-
+document.querySelector(".navbar").appendChild(menuButton);
 
 menuButton.addEventListener("click", () => {
-
-  const isOpen =
-    navLinks.classList.toggle("open");
-
-  menuButton.textContent =
-    isOpen ? "×" : "☰";
-
+  navLinks.classList.toggle("open");
 });
 
 
-/* Close mobile menu after clicking a link */
-
-navLinks.querySelectorAll("a").forEach((link) => {
-
+// Close mobile menu when a link is clicked
+document.querySelectorAll(".nav-links a").forEach(link => {
   link.addEventListener("click", () => {
-
     navLinks.classList.remove("open");
-
-    menuButton.textContent = "☰";
-
   });
-
 });
 
 
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
+// ===============================
+// SCROLL REVEAL
+// ===============================
 
-const revealElements = document.querySelectorAll(
-  ".section, .project-card, .skill-card, .experience"
-);
+const revealElements =
+  document.querySelectorAll(".reveal");
 
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
 
-const observer = new IntersectionObserver(
-  (entries, observer) => {
+      entries.forEach(entry => {
 
-    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
 
-      if (!entry.isIntersecting) {
-        return;
-      }
-
-      entry.target.classList.add("reveal");
-
-      requestAnimationFrame(() => {
-        entry.target.classList.add("show");
       });
 
-      observer.unobserve(entry.target);
-    });
+    },
+    {
+      threshold: 0.15
+    }
+  );
 
-  },
-  {
-    threshold: 0.12
-  }
-);
-
-
-revealElements.forEach((element) => {
-  observer.observe(element);
+revealElements.forEach(element => {
+  revealObserver.observe(element);
 });
 
 
-/* =====================================================
-   ACTIVE NAVIGATION
-===================================================== */
+// ===============================
+// ACTIVE NAVIGATION
+// ===============================
 
-const sections = document.querySelectorAll(
-  "section[id]"
-);
+const sections =
+  document.querySelectorAll("section");
 
+const navItems =
+  document.querySelectorAll(".nav-links a");
 
-const navigationLinks = document.querySelectorAll(
-  ".nav-links a"
-);
+const sectionObserver =
+  new IntersectionObserver(
+    entries => {
 
+      entries.forEach(entry => {
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
+        if (entry.isIntersecting) {
 
-    entries.forEach((entry) => {
+          navItems.forEach(link => {
+            link.classList.remove("active");
+          });
 
-      if (!entry.isIntersecting) {
-        return;
-      }
+          const activeLink =
+            document.querySelector(
+              `.nav-links a[href="#${entry.target.id}"]`
+            );
 
-      navigationLinks.forEach((link) => {
-        link.classList.remove("active");
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+
+        }
+
       });
 
-      const activeLink =
-        document.querySelector(
-          `.nav-links a[href="#${entry.target.id}"]`
-        );
+    },
+    {
+      threshold: 0.4
+    }
+  );
 
-      if (activeLink) {
-        activeLink.classList.add("active");
-      }
-
-    });
-
-  },
-  {
-    threshold: 0.4
-  }
-);
-
-
-sections.forEach((section) => {
+sections.forEach(section => {
   sectionObserver.observe(section);
 });
